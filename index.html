@@ -50,6 +50,8 @@
         #popup-image {
             max-height: 80vh; /* Set the maximum height as a percentage of the viewport height */
             max-width: 100%; /* Ensure the image does not exceed the width of the popup */
+            display: block; /* Make the image visible */
+            margin: 0 auto; /* Center the image horizontally */
         }
         #popup-message {
             font-size: 3vw; /* Increase the font size */
@@ -99,14 +101,15 @@
         }
 
         function displayPopup() {
-            var popup = document.getElementById('popup');
+    var popup = document.getElementById('popup');
 
-            popup.style.display = 'flex';
+    popup.style.display = 'flex';
 
-            popup.addEventListener('click', function() {
-                popup.style.display = 'none';
-            });
-        }
+    popup.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+}
+
     </script>
 </body>
 </html>
