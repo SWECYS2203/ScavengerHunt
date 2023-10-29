@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background-color: #f5f5f5; /* Background color */
+        }
+        #question {
+            font-size: 4vw; /* Responsive font size using viewport width units */
+            max-width: 80%; /* Set a maximum width to prevent very long lines */
+        }
+        #answer {
+            font-size: 2vw; /* Responsive font size */
+            max-width: 80%;
+            padding: 10px;
+        }
+        #result {
+            font-size: 2vw; /* Responsive font size */
+            font-weight: bold;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        #popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            max-height: 100%; /* Set a maximum height to fit the screen */
+            overflow: auto; /* Enable scrolling if the content overflows */
+        }
+        #popup-image {
+            max-height: 80vh; /* Set the maximum height as a percentage of the viewport height */
+            max-width: 100%; /* Ensure the image does not exceed the width of the popup */
+        }
+		#popup-message {
+            font-size: 1vw; /* Increase the font size */
+            font-weight: bold; /* Add bold style */
+        }
+        button {
+            font-size: 1.5w; /* Responsive font size */
+            background-color: #007BFF; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+		
+    </style>
+</head>
+<body>
+    <div id="question">What can you catch but never throw?</div>
+    <input type="text" id="answer" placeholder="Enter your answer" style="text-align: center;">
+    <button onclick="checkAnswer()">Submit</button>
+    <div id="result"></div>
+    <div id="popup">
+        <div id="popup-content">
+            <span id="popup-message"></span>
+            <img id="popup-image" src="https://i.ibb.co/hcH9jtm/123.jpg" alt="Correct Answer" width="80%">
+        </div>
+    </div>
+    
+    <script>
+        function checkAnswer() {
+            var userAnswer = document.getElementById('answer').value.toLowerCase();
+            var correctAnswer = 'cold';
+            var resultMessage = document.getElementById('result');
+            var popupImage = document.getElementById('popup-image');
+            var popupMessage = document.getElementById('popup-message');
+
+            if (userAnswer === correctAnswer) {
+                resultMessage.textContent = '';
+                popupImage.style.display = 'block';
+                popupMessage.textContent = 'Correct! Good job!';
+                displayPopup();
+            } else {
+                resultMessage.textContent = '';
+                popupMessage.textContent = 'Better luck next time.';
+                displayPopup();
+            }
+        }
+
+        function displayPopup() {
+            var popup = document.getElementById('popup');
+
+            popup.style.display = 'flex';
+
+            popup.addEventListener('click', function() {
+                popup.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
