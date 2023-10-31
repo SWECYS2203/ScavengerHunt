@@ -69,21 +69,55 @@
     </style>
 </head>
 <body>
-    <div id="question">What can you catch but never throw?</div>
+    <div id="question">Loading question...</div>
     <input type="text" id="answer" placeholder="Enter your answer" style="text-align: center;">
     <button onclick="checkAnswer()">Submit</button>
     <div id="result"></div>
     <div id="popup">
         <div id="popup-content">
             <span id="popup-message"></span>
-            <img id="popup-image" src="https://i.ibb.co/MDvZhmK/Escape-Room-Event-Flyer-Template-Made-with-Poster-My-Wall.jpg" alt="Correct Answer" width="80%">
+            <img id="popup-image" src="" alt="Correct Answer" width="80%">
         </div>
     </div>
     
     <script>
+        // Define an array of objects, each containing a question and its answer
+        var questionsAndAnswers = [
+            {
+                question: "You let people in when you hear this bell.",
+                answer: "doorbell"
+            },
+            {
+                question: "I never get angry, but I do get hot. I'm the perfect place to place a pan or a pot.",
+                answer: "stove"
+            },
+            {
+                question: "You pull me back in the morning to bring in the light and shut me when the sun goes down before you say goodnight.",
+                answer: "curtains"
+            }
+        ];
+
+        // Function to select a random question from the array
+        function getRandomQuestion() {
+            var randomIndex = Math.floor(Math.random() * questionsAndAnswers.length);
+            return questionsAndAnswers[randomIndex];
+        }
+
+        // Function to update the question displayed on the page
+        function updateQuestion() {
+            var questionElement = document.getElementById('question');
+            var popupImage = document.getElementById('popup-image');
+            var randomQuestion = getRandomQuestion();
+            questionElement.textContent = randomQuestion.question;
+            popupImage.src = "https://i.ibb.co/MDvZhmK/Escape-Room-Event-Flyer-Template-Made-with-Poster-My-Wall.jpg"; // Set the image source
+            return randomQuestion.answer;
+        }
+
+        // Initialize the page with a random question and store the correct answer
+        var correctAnswer = updateQuestion();
+
         function checkAnswer() {
             var userAnswer = document.getElementById('answer').value.toLowerCase();
-            var correctAnswer = 'cold';
             var resultMessage = document.getElementById('result');
             var popupImage = document.getElementById('popup-image');
             var popupMessage = document.getElementById('popup-message');
@@ -93,6 +127,8 @@
                 popupImage.style.display = 'block';
                 popupMessage.textContent = 'Correct! Good job!';
                 displayPopup();
+                // After displaying the pop-up, update the question for the next round
+                correctAnswer = updateQuestion();
             } else {
                 resultMessage.textContent = '';
                 popupMessage.textContent = 'Better luck next time.';
@@ -101,15 +137,14 @@
         }
 
         function displayPopup() {
-    var popup = document.getElementById('popup');
+            var popup = document.getElementById('popup');
 
-    popup.style.display = 'flex';
+            popup.style.display = 'flex';
 
-    popup.addEventListener('click', function() {
-        popup.style.display = 'none';
-    });
-}
-
+            popup.addEventListener('click', function() {
+                popup.style.display = 'none';
+            });
+        }
     </script>
 </body>
 </html>
